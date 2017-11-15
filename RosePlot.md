@@ -4,7 +4,7 @@ author: "Keon-Woong Moon"
 date: "2017-11-15"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ggplotAssist}
+  %\VignetteIndexEntry{RosePlot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
