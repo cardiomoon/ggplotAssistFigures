@@ -43,24 +43,31 @@ A rose plot is a stacked bar plot with polar coordinate. With ggplot2, you can m
 
 ## Data
 
-I will use the `rose` data included in package ggiraphExtra. The rose data is a phony dataset representing rose sales.
+I will use the `rose` data included in package ggiraphExtra. The rose data is a phony dataset representing rose sales. 
 
 ```{r}
-ggiraphExtra::rose
+library(ggiraphExtra)
+rose
 ```
 
+Alternatively, you can download the `rose.csv` file from my github using the following code.
+
+```{r}
+library(readr)
+url <- "https://raw.github.com/cardiomoon/ggplotAssistFigures/master/rose.csv"
+rose=read_csv(url)
+rose
+```
 
 ## R code for rose plot
 
-
 ### 1. Make a bar plot
-
 
 First, make a bar plot. In this plot the height of bar represent values in the data.
 
 ```{r,message=FALSE,fig.width=6,fig.height=4}
 require(ggplot2)
-ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="identity")
+ggplot(data=rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="identity")
 ```
 
 ### 2. Adjust options for bar graph
@@ -68,7 +75,7 @@ ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="i
 The default bar width is 0.9(90% of the resolution of data). To remove the spaces between the bars, set the width of bar 1 and the boundary color "black" and the thickness of line 0.1.
 
 ```{r,fig.width=6,fig.height=4}
-ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
+ggplot(data=rose,aes(x=Month,y=value,fill=group))+
     geom_bar(stat="identity",width=1,color="black",size=0.1)
 ```
 
@@ -78,7 +85,7 @@ ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
 To make a rose plot, apply polar coordinate with coord_polar(). Apply "Reds" palette with scale_fill_brewer().
 
 ```{r,fig.width=6,fig.height=4}
-ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
+ggplot(data=rose,aes(x=Month,y=value,fill=group))+
     geom_bar(stat="identity",width=1,color="black",size=0.1)+
     coord_polar()+
     scale_fill_brewer(palette="Reds",direction=-1)
