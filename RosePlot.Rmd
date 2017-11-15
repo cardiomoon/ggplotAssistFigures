@@ -1,0 +1,89 @@
+---
+title: "How to make a Nightingale's rose plot with ggplotAssist"
+author: "Keon-Woong Moon"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggplotAssist}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = NA,fig.align='center',out.width="90%")
+```
+
+```{r,echo=FALSE}
+knitr::include_graphics("http://historyofinformation.com/images/3815a%20Large.jpg")
+```
+
+In 1858 nurse, statistician, and reformer Florence Nightingale published *Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army. Founded Chiefly on the Experience of the Late War. Presented by Request to the Secretary of State for War.* This privately printed work contained a color statistical graphic entitled "Diagram of the Causes of Mortality in the Army of the East" which showed that epidemic disease, which was responsible for more British deaths in the course of the Crimean War than battlefield wounds, could be controlled by a variety of factors including nutrition, ventilation, and shelter. The graphic, which Nightingale used as a way to explain complex statistics simply, clearly, and persuasively, has become known as Nightingale's "Rose Diagram." 
+(http://www.historyofinformation.com/expanded.php?id=3815)
+
+## Prerequisite
+
+You have to install the developmental version of R package `editData` from github.
+
+```{r,eval=FALSE}
+#install.packages("devtools")
+devtools::install_github("cardiomoon/editData")
+```
+
+## Install package
+
+You can install `ggplotAssist` package from github. 
+
+```{r,eval=FALSE}
+#install.packages("devtools")
+devtools::install_github("cardiomoon/ggplotAssist")
+```
+
+## What is the rose plot?
+
+A rose plot is a stacked bar plot with polar coordinate. With ggplot2, you can make the rose plot easily.
+
+## Data
+
+I will use the `rose` data included in package ggiraphExtra. The rose data is a phony dataset representing rose sales.
+
+```{r}
+ggiraphExtra::rose
+```
+
+
+## R code for rose plot
+
+
+### 1. Make a bar plot
+
+
+First, make a bar plot. In this plot the height of bar represent values in the data.
+
+```{r,message=FALSE}
+require(ggplot2)
+p <- ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="identity")
+p
+```
+
+### 2. Adjust options for bar graph
+
+The default bar width is 0.9(90% of the resolution of data). Set the bar width 1 and the boundary color "black" and the thickness of line 0.1.
+
+```{r}
+ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
+    geom_bar(stat="identity",width=1,color="black",size=0.1)
+```
+
+### 3. Apply polar coordinate
+
+
+To make a rose plot, apply polar coordinate with coord_polar(). Apply "Reds" palette with scale_fill_brewer().
+
+```{r}
+ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
+    geom_bar(stat="identity",width=1,color="black",size=0.1)+
+    coord_polar()+
+    scale_fill_brewer(palette="Reds",direction=-1)
+```
+
+## Make a rose plot with ggplotAssist
+
