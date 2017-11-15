@@ -58,17 +58,16 @@ ggiraphExtra::rose
 
 First, make a bar plot. In this plot the height of bar represent values in the data.
 
-```{r,message=FALSE}
+```{r,message=FALSE,fig.width=6,fig.height=4}
 require(ggplot2)
-p <- ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="identity")
-p
+ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+geom_bar(stat="identity")
 ```
 
 ### 2. Adjust options for bar graph
 
-The default bar width is 0.9(90% of the resolution of data). Set the bar width 1 and the boundary color "black" and the thickness of line 0.1.
+The default bar width is 0.9(90% of the resolution of data). To remove the spaces between the bars, set the width of bar 1 and the boundary color "black" and the thickness of line 0.1.
 
-```{r}
+```{r,fig.width=6,fig.height=4}
 ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
     geom_bar(stat="identity",width=1,color="black",size=0.1)
 ```
@@ -78,12 +77,75 @@ ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
 
 To make a rose plot, apply polar coordinate with coord_polar(). Apply "Reds" palette with scale_fill_brewer().
 
-```{r}
+```{r,fig.width=6,fig.height=4}
 ggplot(data=ggiraphExtra::rose,aes(x=Month,y=value,fill=group))+
     geom_bar(stat="identity",width=1,color="black",size=0.1)+
     coord_polar()+
     scale_fill_brewer(palette="Reds",direction=-1)
 ```
 
-## Make a rose plot with ggplotAssist
+## Make a rose plot with ggplotAssist - Standard method
+
+1. In RStudio, Select File ... New File...R script. To use data rose, highlight the data name `rose`(1). Execute ggplotAssist addin(arrow), to interactively manipulate it.
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/1.jpg")
+```
+
+2. To mapping the variables, select `x` among aesthetics and `Month` among mapping. Select `y` among aesthetics and `value`. Select `fill`(1) and `group`(arow) to map the fill variable. 
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/0.jpg")
+```
+
+3. Press `geom` button(1). Select `geom_bar`(2). Select `identity` as stat(3). To set the color argument of geom_bar(), select `color`(4) and enter `black`(5) and select `addquote` checkbox(6). The R code for this layer is shown(7) and you can see the plot preview at lower right corner(8).
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/2.jpg")
+```
+
+4. Set the `size`(9) of bar `0.1`(10). To remove the spaces between the bars, set the `width` of bar 1(11). You can see the R code for this layer(scarlet rectangle). Press `Add Layer` button to add this layer.
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/3.jpg")
+```
+
+5. To apply `Reds` palette to this plot, press `scale` button(12). Select scale_fill_brewer(13) and select `Reds` palette(14) and set the direction of palette -1(15). Press `Add layer` button to add this layer(16). 
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/4.jpg")
+```
+
+6. To apply ploar coordinate, press `coord` button(17). Select `coord_polar`(18) and press `Add Layer` button(19).
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/5.jpg")
+```
+
+7. You can see the plot layer by layer. Press the `Layer by layer` button(20) and press the arrow head(arrow). You can see the plot layer by layer.
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/6.jpg")
+```
+
+
+## Make a rose plot with ggplotAssist - A shortcut
+
+1. After maaping the variables, press the `geom` button(1). Select `geom_bar`(2) among geoms and set the stat `identity`(3). You can see the R code for this layer(4) and the plot preview(5). Press the `Make a Rose Plot` button(6) and you can get the rose plot. 
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/7.jpg")
+```
+
+2. Press the `Done` button(arrow).
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/8.jpg")
+```
+
+3. The code for the rose plot will be emitted at the cursor position(scarlet rectangle).
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/cardiomoon/ggplotAssistFigures/master/RosePlot/9.jpg")
+```
 
